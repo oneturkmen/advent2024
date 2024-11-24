@@ -1,0 +1,29 @@
+[project]
+name = "advent2024"
+version = "0.1.0"
+description = "Kevin's Solutions to AoC 2024"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Kevin H Wilson", email = "khwilson@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "typer>=0.13.1",
+]
+
+[project.scripts]
+advent = "advent2024.cli:app"
+
+[tool.ruff.lint]
+select = ["I"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.3",
+    "ruff>=0.8.0",
+]
