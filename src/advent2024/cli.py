@@ -5,9 +5,10 @@ import typer
 
 app = typer.Typer()
 
+
 @app.command()
 def run(day: int, data_file: str | None = None) -> None:
-    """ Run an AOC day """
+    """Run an AOC day"""
     mod = importlib.import_module(f"advent2024.days.day{day:02d}")
 
     if not data_file:
