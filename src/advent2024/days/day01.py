@@ -1,30 +1,40 @@
-from collections import Counter
 from pathlib import Path
-
-
-def read_data(data_file: str | Path) -> tuple[list[int], list[int]]:
-    left_data = []
-    right_data = []
-    with open(data_file, "rt") as infile:
-        for line in infile:
-            l, r = line.strip().split()
-            left_data.append(int(l))
-            right_data.append(int(r))
-
-    return left_data, right_data
-
+from collections import defaultdict
 
 def part1(data_file: str | Path) -> int | str:
-    left_data, right_data = read_data(data_file)
-
-    left_data.sort()
-    right_data.sort()
-
-    return sum(abs(l - r) for l, r in zip(left_data, right_data))
+    left_loc = []
+    right_loc = []
+    with open(data_file, "rt") as infile:
+        for line in infile.readlines():
+            l, r = line.strip().split()
+            left_loc.append(int(l))
+            right_loc.append(int(r))
+    
+    return part1_solution(left_loc, right_loc)
 
 
 def part2(data_file: str | Path) -> int | str:
-    left_data, right_data = read_data(data_file)
+    left_loc = []
+    right_loc = []
+    with open(data_file, "rt") as infile:
+        for line in infile.readlines():
+            l, r = line.strip().split()
+            left_loc.append(int(l))
+            right_loc.append(int(r))
+    
+    return part2_solution(left_loc, right_loc)
 
-    counts = Counter(right_data)
-    return sum(l * counts.get(l, 0) for l in left_data)
+
+def part1_solution(left_loc, right_loc):
+    left_loc.sort()
+    right_loc.sort()
+
+    return sum([ abs(l - r) for l, r in zip(left_loc, right_loc)])
+
+
+def part2_solution(left_loc, right_loc):
+    right_count = defaultdict(lambda : 0)
+    for num in right_loc:
+        right_count[num] += 1
+
+    return sum([ l * right_count[l] for l in left_loc])
