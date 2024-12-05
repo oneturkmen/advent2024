@@ -55,7 +55,7 @@ def part1_solution(orderings, updates):
                     break
             if not good_update:
                 break
-        
+
         if good_update:
             good_updates.append(update[len(update)//2])
     return sum(good_updates)
@@ -75,16 +75,16 @@ def part2_solution(orderings, updates):
                     break
             if not good_update:
                 break
-        
+
         if not good_update:
             bad_updates.append(update)
-    
+
     def compare(a, b):
         if a in before_this[b]:
             return 1
         else:
             return -1
-    
+
     bad_updates = [sorted(upd, key=cmp_to_key(compare)) for upd in bad_updates]
     bad_updates = [upd[len(upd) // 2] for upd in bad_updates]
 
